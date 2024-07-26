@@ -1,0 +1,30 @@
+<div class="container">
+    <h2 style="text-align: center; padding-top: 40px;">Form Edit Nation</h2>
+<form id="form" class="form-horizontal" action="/action_page.php" [formGroup]="editFormNation" (ngSubmit)="onUpdateNation()">
+
+  <div class="form-group" style="margin-top: 20px;">
+    <label class="control-label col-sm-3" >Name Nation: {{nameNation}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="nameNation" placeholder="" name="nameNation">
+      <div *ngIf="editFormNation['controls']['nameNation'].dirty && editFormNation['controls']['nameNation'].errors">
+        <small style="color: red;" *ngIf="editFormNation['controls']['nameNation'].errors['required']">The name of the country is not empty </small>
+        <small style="color: red;" *ngIf="editFormNation['controls']['nameNation'].errors['pattern']">The name of the country must be entered correctly and not allowed to enter the number</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >Title Nation: {{titleNation}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="titleNation" placeholder="" name="titleNation">
+      <div *ngIf="editFormNation['controls']['titleNation'].dirty && editFormNation['controls']['titleNation'].errors">
+        <small style="color: red;" *ngIf="editFormNation['controls']['titleNation'].errors['required']">The title of the country is not empty </small>
+        <small style="color: red;" *ngIf="editFormNation['controls']['titleNation'].errors['pattern']">The nation's title must be exactly imported and not allowed to enter the number</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="margin-top: 20px;">        
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-primary" [disabled]="editFormNation.invalid">Save</button>
+    </div>
+  </div>
+</form>
+</div>
+<!-- [disabled]="editFormNation.invalid -->

@@ -1,0 +1,43 @@
+<nav id="nav" class="navbar navbar-inverse">
+    <div class="div-nav">
+        <a id="btn-back"  routerLink="/home"  class="btn btn-sm btn-primary" >Home Back</a> 
+        <a style="margin-left: 850px;" routerLink=""  class="btn btn-sm btn-primary" >Sign out</a>
+    </div>
+</nav>
+<h1 style="text-align: center;">List Nations</h1>
+<div class="div-searchNation">
+<a id="btn-add" routerLink="create-nation"  class="btn btn-sm btn-primary" >Add</a>
+<input type="text" [(ngModel)]="searchNation" placeholder="Search..." name="search">
+<button (click)="onSearchNation()">Search</button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name
+            <button style="font-size: 15px;" (click)="handleClickNation()">^</button>
+        </th>
+        <th scope="col">Title</th>
+        <th scope="col">Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let pro of listNation">
+        <td>{{ pro.idNation }}</td>
+        <td>{{ pro.nameNation }}</td>
+        <td>{{ pro.titleNation }}</td>
+
+        <td>
+            <a routerLink="edit-nation/{{pro.idNation}}" class="btn btn-sm btn-primary" style="margin-right: 5px;">Edit</a>
+            <a routerLink="list-nation" (click)="OnDeleteNation(pro.idNation)" class="btn btn-sm btn-danger"  >Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="div-pageNation" *ngIf="totalPagesNation > 1">
+    <button  (click)="goToPageNation(currentPageNation - 1)" [disabled]="currentPageNation === 1">Previous</button>
+    <span style="margin: 10px; margin-right: 10px; font-weight: bolder;"> {{ currentPageNation }} </span>
+    <button (click)="goToPageNation(currentPageNation + 1)" [disabled]="currentPageNation === totalPagesNation">Next</button>
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+    <h2 style="text-align: center; padding-top: 40px;">Form Edit Citys</h2>
+<form id="form" class="form-horizontal" action="/action_page.php" [formGroup]="editFormCity" (ngSubmit)="onUpdateCity()">
+
+  <div class="form-group" style="margin-top: 10px;">
+    <label class="control-label col-sm-3" >Name City: {{nameCity}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="nameCity" placeholder="Example: Hà Nội" name="nameCity">
+      <div *ngIf="editFormCity['controls']['nameCity'].dirty && editFormCity['controls']['nameCity'].errors">
+        <small style="color: red;" *ngIf="editFormCity['controls']['nameCity'].errors['required']">The name of the city/the province is not empty </small>
+        <small style="color: red;" *ngIf="editFormCity['controls']['nameCity'].errors['pattern']">The name of the city/province must be imported correctly and not allowed to enter the number</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >Title City: {{titleCity}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="titleCity" placeholder="Example: Thành Phố / Tỉnh" name="titleCity">
+      <div *ngIf="editFormCity['controls']['titleCity'].dirty && editFormCity['controls']['titleCity'].errors">
+        <small style="color: red;" *ngIf="editFormCity['controls']['titleCity'].errors['required']">The title of the city/province must not leave empty </small>
+        <small style="color: red;" *ngIf="editFormCity['controls']['titleCity'].errors['pattern']">The title of the city/province must be imported correctly and not allowed to enter the number</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >ID Nation: {{idNation}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="idNation" placeholder="Example: 1 / 2 ..." name="idNation">
+      <div *ngIf="editFormCity['controls']['idNation'].dirty && editFormCity['controls']['idNation'].errors">
+        <small style="color: red;" *ngIf="editFormCity['controls']['idNation'].errors['required']">The country code is not allowed to disable and only allow numbers</small>
+        <small style="color: red;" *ngIf="editFormCity['controls']['idNation'].errors['pattern']">The nation code does not enter the correct format (EX : 1)</small>
+        <small style="color: red;" *ngIf="editFormCity['controls']['idNation'].errors['maxlength']">The country code does not exist</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="margin-top: 20px;">        
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-primary" [disabled]="editFormCity.invalid">Save</button>
+    </div>
+  </div>
+</form>
+</div>

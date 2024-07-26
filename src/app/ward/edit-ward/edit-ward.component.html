@@ -1,0 +1,38 @@
+<div class="container">
+    <h2 style="text-align: center; padding-top: 40px;">Form Edit Wards</h2>
+<form id="form" class="form-horizontal" action="/action_page.php" [formGroup]="wardFormEdit" (ngSubmit)="onUpdateWard()">
+
+  <div class="form-group" style="margin-top: 10px;">
+    <label class="control-label col-sm-3" >Name Ward: {{nameWard}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="nameWard" placeholder="Example: Xuân Đỉnh" name="nameWard">
+      <div *ngIf="wardFormEdit['controls']['nameWard'].dirty && wardFormEdit['controls']['nameWard'].errors">
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['nameWard'].errors['required']">The name of the Ward must not leave empty </small>
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['nameWard'].errors['pattern']">The name of the Ward must be imported correctly and not allowed to enter the number</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >Title Ward: {{titleWard}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="titleWard" placeholder="Example: Phường / Xã / Thị Trấn" name="titleWard">
+      <div *ngIf="wardFormEdit['controls']['titleWard'].dirty && wardFormEdit['controls']['titleWard'].errors">
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['titleWard'].errors['required']">The Ward's title is not allowed to leave empty </small>
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['titleWard'].errors['pattern']">The Ward's title must be entered correctly and is not allowed to enter the number - Special characters</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >ID District: {{idDistrict}}</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="idDistrict" placeholder="Example: 1 / 2 ..." name="idDistrict">
+      <div *ngIf="wardFormEdit['controls']['idDistrict'].dirty && wardFormEdit['controls']['idDistrict'].errors">
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['idDistrict'].errors['required']">The District codes are not allowed to leave and only allow numbers</small>
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['idDistrict'].errors['pattern']">The District code does not enter the correct format (EX : 1)</small>
+        <small style="color: red;" *ngIf="wardFormEdit['controls']['idDistrict'].errors['maxlength']">The District code does not exist</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="margin-top: 20px;">        
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-primary" [disabled]="wardFormEdit.invalid">Save</button>
+    </div>
+  </div>
+</form>
+</div>

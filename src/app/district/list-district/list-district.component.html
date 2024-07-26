@@ -1,0 +1,46 @@
+<nav id="nav" class="navbar navbar-inverse">
+    <div class="div-nav">
+        <a id="btn-back"  routerLink="/home"  class="btn btn-sm btn-primary" >Home Back</a> 
+        <a style="margin-left: 850px;" routerLink=""  class="btn btn-sm btn-primary" >Sign out</a>
+    </div>
+</nav>
+<h1 style="text-align: center;">List Districts</h1>
+<div class="div-searchDistrict">
+<a id="btn-add" routerLink="create-district"  class="btn btn-sm btn-primary" >Add</a>
+<input type="text" [(ngModel)]="searchDistrict" placeholder="Search..." name="search">
+<button (click)="onSearchDistrict()">Search</button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">District 
+            <button style="font-size: 15px;" (click)="handleClickDistrict()">^</button>
+        </th>
+        <th scope="col">Title</th>
+        <th scope="col">City</th>
+
+        <th scope="col">Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let pro of listDistrict">
+        <td>{{ pro.idDistrict }}</td>
+        <td>{{ pro.nameDistrict }}</td>
+        <td>{{ pro.titleDistrict }}</td>
+        <td>{{ pro.nameCity }}</td>
+
+        <td>
+            <a routerLink="edit-district/{{pro.idDistrict}}" class="btn btn-sm btn-primary" style="margin-right: 5px;">Edit</a>
+            <a routerLink="list-district" (click)="OnDeleteDistrict(pro.idDistrict)" class="btn btn-sm btn-danger"  >Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="div-pageDistrict" *ngIf="totalPageDistrict > 1">
+    <button  (click)="goToPageDistrict(currentPageDistrict - 1)" [disabled]="currentPageDistrict === 1">Previous</button>
+    <span style="margin: 10px; margin-right: 10px; font-weight: bolder;"> {{ currentPageDistrict }} </span>
+    <button (click)="goToPageDistrict(currentPageDistrict + 1)" [disabled]="currentPageDistrict === totalPageDistrict">Next</button>
+</div>

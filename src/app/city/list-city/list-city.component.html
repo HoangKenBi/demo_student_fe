@@ -1,0 +1,46 @@
+<nav id="nav" class="navbar navbar-inverse">
+    <div class="div-nav">
+        <a id="btn-back"  routerLink="/home"  class="btn btn-sm btn-primary" >Home Back</a> 
+        <a style="margin-left: 850px;" routerLink=""  class="btn btn-sm btn-primary" >Sign out</a>
+    </div>
+</nav>
+<h1 style="text-align: center;">List Citys</h1>
+<div class="div-searchCity">
+<a id="btn-add" routerLink="create-city"  class="btn btn-sm btn-primary" >Add</a>
+<input type="text" [(ngModel)]="searchCity" placeholder="Search..." name="search">
+<button (click)="onSearchCity()">Search</button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">City 
+            <button style="font-size: 15px;" (click)="handleClickCity()">^</button>
+        </th>
+        <th scope="col">title</th>
+        <th scope="col">Nation</th>
+
+        <th scope="col">Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let pro of listCity">
+        <td>{{ pro.idCity }}</td>
+        <td>{{ pro.nameCity }}</td>
+        <td>{{ pro.titleCity }}</td>
+        <td>{{ pro.nameNation }}</td>
+
+        <td>
+            <a routerLink="edit-city/{{pro.idCity}}" class="btn btn-sm btn-primary" style="margin-right: 5px;">Edit</a>
+            <a routerLink="list-city" (click)="OnDeleteCity(pro.idCity)" class="btn btn-sm btn-danger"  >Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="div-pageCity" *ngIf="totalPagesCity > 1">
+    <button  (click)="goToPageCity(currentPageCity - 1)" [disabled]="currentPageCity === 1">Previous</button>
+    <span style="margin: 10px; margin-right: 10px; font-weight: bolder;"> {{ currentPageCity }} </span>
+    <button (click)="goToPageCity(currentPageCity + 1)" [disabled]="currentPageCity === totalPagesCity">Next</button>
+</div>

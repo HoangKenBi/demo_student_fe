@@ -1,0 +1,46 @@
+<nav id="nav" class="navbar navbar-inverse">
+    <div class="div-nav">
+        <a id="btn-back"  routerLink="/home"  class="btn btn-sm btn-primary" >Home Back</a> 
+        <a style="margin-left: 850px;" routerLink=""  class="btn btn-sm btn-primary" >Sign out</a>
+    </div>
+</nav>
+<h1 style="text-align: center;">List Wards</h1>
+<div class="div-searchWard">
+<a id="btn-add" routerLink="create-ward"  class="btn btn-sm btn-primary" >Add</a>
+<input type="text" [(ngModel)]="searchWard" placeholder="Search..." name="search">
+<button (click)="onSearchWard()">Search</button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Ward 
+            <button style="font-size: 15px;" (click)="handleClickWard()">^</button>
+        </th>
+        <th scope="col">Title</th>
+        <th scope="col">District</th>
+
+        <th scope="col">Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let pro of listWard">
+        <td>{{ pro.idWard }}</td>
+        <td>{{ pro.nameWard }}</td>
+        <td>{{ pro.titleWard }}</td>
+        <td>{{ pro.nameDistrict }}</td>
+
+        <td>
+            <a routerLink="edit-ward/{{pro.idWard}}" class="btn btn-sm btn-primary" style="margin-right: 5px;">Edit</a>
+            <a routerLink="list-ward" (click)="OnDeleteWard(pro.idWard)" class="btn btn-sm btn-danger"  >Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="div-pageWard" *ngIf="totalPageWard > 1">
+    <button  (click)="goToPageWard(currentPageWard - 1)" [disabled]="currentPageWard === 1">Previous</button>
+    <span style="margin: 10px; margin-right: 10px; font-weight: bolder;"> {{ currentPageWard }} </span>
+    <button (click)="goToPageWard(currentPageWard + 1)" [disabled]="currentPageWard === totalPageWard">Next</button>
+</div>

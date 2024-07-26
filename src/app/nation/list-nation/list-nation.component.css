@@ -1,0 +1,34 @@
+#nav{
+    background-color: antiquewhite;
+    margin-top: 5px;
+}
+#btn-back{
+    border-radius: 8px;
+    margin-left: 80px;
+}
+.div-nav{
+    margin-left: 150px;
+}
+
+
+.table{
+    margin-left: 500px;   
+    width: 550px; /* Tùy chỉnh chiều rộng theo ý muốn */
+    margin-top: 15px;
+}
+#btn-add{
+    margin-right: 20px;
+}
+#btn-hh{
+    margin-left: 20px;
+}
+.div-searchNation{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.div-pageNation{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}

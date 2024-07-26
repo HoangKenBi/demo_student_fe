@@ -1,0 +1,58 @@
+<nav id="nav" class="navbar navbar-inverse">
+    <div class="div-nav">
+        <a id="btn-back"  routerLink="/home"  class="btn btn-sm btn-primary" >Home Back</a> 
+        <a style="margin-left: 850px;" routerLink=""  class="btn btn-sm btn-primary" >Sign out</a>
+    </div>
+</nav>
+<h1 style="text-align: center;">List Students</h1>
+<div class="div-searchStudent">
+<a id="btn-add" routerLink="create-student"  class="btn btn-sm btn-primary" >Add</a>
+<input type="text" [(ngModel)]="searchStudent" placeholder="Search..." name="search">
+<button (click)="onSearchStudent()">Search</button>
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Student 
+            <button style="font-size: 15px;" (click)="handleClickStudentName()">^</button>
+        </th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">BirthDay 
+            <button style="font-size: 15px;" (click)="handleClickStudentBirth()">^</button>
+        </th>
+        <th scope="col">Nation</th>
+        <th scope="col">City</th>
+        <th scope="col">District</th>
+        <th scope="col">Ward</th>
+
+        <th scope="col">Option</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor=" let pro of listStudent">
+        <td>{{ pro.idStudent }}</td>
+        <td>{{ pro.nameStudent }}</td>
+        <td>{{ pro.phoneStudent }}</td>
+        <td>{{ pro.emailStudent }}</td>
+        <td>{{ pro.birthDayStudent }}</td>
+        <td>{{ pro.nameNation }}</td>
+        <td>{{ pro.nameCity }}</td>
+        <td>{{ pro.nameDistrict }}</td>
+        <td>{{ pro.nameWard }}</td>
+
+        <td>
+            <a routerLink="edit-student/{{pro.idStudent}}" class="btn btn-sm btn-primary" style="margin-right: 5px;">Edit</a>
+            <a routerLink="list-student" (click)="OnDeleteStudent(pro.idStudent)" class="btn btn-sm btn-danger"  >Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div class="div-pageStudent" *ngIf="totalPageStudent > 1">
+    <button  (click)="goToPageStudent(currentPageStudent - 1)" [disabled]="currentPageStudent === 1">Previous</button>
+    <span style="margin: 10px; margin-right: 10px; font-weight: bolder;"> {{ currentPageStudent }} </span>
+    <button (click)="goToPageStudent(currentPageStudent + 1)" [disabled]="currentPageStudent === totalPageStudent">Next</button>
+</div>

@@ -1,0 +1,30 @@
+#nav{
+    background-color: antiquewhite;
+    margin-top: 5px;
+}
+a{
+    border-radius: 8px;
+    margin-left: 80px;
+}
+.div-nav{
+    margin-left: 150px;
+}
+.div-body{
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    position: relative;
+}
+.overlay-text {
+    position: absolute;
+    top: 50%; /* Đặt text ở giữa theo chiều dọc */
+    left: 50%; /* Đặt text ở giữa theo chiều ngang */
+    transform: translate(-50%, -50%);
+    color: white; /* Màu chữ */
+    background-color: rgba(0, 0, 0, 0.5); 
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 55px;
+  }

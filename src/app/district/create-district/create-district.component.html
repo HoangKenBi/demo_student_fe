@@ -1,0 +1,38 @@
+<div class="container">
+    <h2 style="text-align: center; padding-top: 40px;">Form Add New</h2>
+<form id="form" class="form-horizontal" action="/action_page.php" [formGroup]="districtFormCreate" (ngSubmit)="onCreateDistrict()">
+
+  <div class="form-group" style="margin-top: 20px;">
+    <label class="control-label col-sm-3" >Name District:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="nameDistrict" placeholder="Example: Thanh Xuân" name="nameDistrict">
+      <div *ngIf="districtFormCreate['controls']['nameDistrict'].dirty && districtFormCreate['controls']['nameDistrict'].errors">
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['nameDistrict'].errors['required']">The name of the district must not leave empty </small>
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['nameDistrict'].errors['pattern']">The name of the district must be imported correctly and not allowed to enter the number</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >Title District:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="titleDistrict" placeholder="Example: Quận / Huyện / Thị Xã" name="titleDistrict">
+      <div *ngIf="districtFormCreate['controls']['titleDistrict'].dirty && districtFormCreate['controls']['titleDistrict'].errors">
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['titleDistrict'].errors['required']">The district's title is not allowed to leave empty </small>
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['titleDistrict'].errors['pattern']">The district's title must be entered correctly and is not allowed to enter the number - Special characters</small>
+      </div>
+    </div>
+    <label class="control-label col-sm-3" >ID City:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+      <input type="text" class="form-control" formControlName="idCity" placeholder="Example: 1 / 2 ..." name="idCity">
+      <div *ngIf="districtFormCreate['controls']['idCity'].dirty && districtFormCreate['controls']['idCity'].errors">
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['idCity'].errors['required']">The city codes are not allowed to leave and only allow numbers</small>
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['idCity'].errors['pattern']">The city code does not enter the correct format (EX : 1)</small>
+        <small style="color: red;" *ngIf="districtFormCreate['controls']['idCity'].errors['maxlength']">The City code does not exist</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="margin-top: 20px;">        
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-primary" [disabled]="districtFormCreate.invalid">Add New</button>
+    </div>
+  </div>
+</form>
+</div>

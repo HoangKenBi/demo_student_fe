@@ -1,0 +1,10 @@
+.container{
+    height: 100%;
+    margin-top: 20px;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center;    /* Căn giữa theo chiều dọc */
+    width: 900px; /* Đặt kích thước của container theo nhu cầu */
+    height: 670px;
+    background-color: lightblue; /* Đặt màu nền cho dễ nhìn */
+}
+

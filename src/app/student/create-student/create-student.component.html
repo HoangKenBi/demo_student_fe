@@ -1,0 +1,85 @@
+<div class="container">
+    <h2 style="text-align: center; padding-top: 40px;">Form Add New</h2>
+<form id="form" class="form-horizontal" action="/action_page.php" [formGroup]="addFormStudent" (ngSubmit)="onCreateStudent()">
+<div class="row">
+    <div style="margin-top: 30px; margin-left: 80px;" class="col-md-5">
+        <label class="control-label col-sm-4" >Name Student:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="nameStudent" placeholder="Example: Hoàng" name="nameStudent">
+          <div *ngIf="addFormStudent['controls']['nameStudent'].dirty && addFormStudent['controls']['nameStudent'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['nameStudent'].errors['required']">The Student's name is not left empty</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['nameStudent'].errors['pattern']">The Student name must be imported correctly and not allowed to enter the number</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >Phone:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="phoneStudent" placeholder="Example: 0123456789" name="phoneStudent">
+          <div *ngIf="addFormStudent['controls']['phoneStudent'].dirty && addFormStudent['controls']['phoneStudent'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['phoneStudent'].errors['required']">Phone number can not be left blank</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['phoneStudent'].errors['pattern']">The phone number is not allowed to enter, must have 10 characters Example: 0123456789</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >Email:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="emailStudent" placeholder="Example: aaa@gmail.com" name="emailStudent">
+          <div *ngIf="addFormStudent['controls']['emailStudent'].dirty && addFormStudent['controls']['emailStudent'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['emailStudent'].errors['required']">Email must not leave blank</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['emailStudent'].errors['email']">Email improper format (abc@gmail.com)</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >BirthDay:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="birthDayStudent" placeholder="Example: 2024-01-01" name="birthDayStudent">
+          <div *ngIf="addFormStudent['controls']['birthDayStudent'].dirty && addFormStudent['controls']['birthDayStudent'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['birthDayStudent'].errors['required']">Date of birth must not leave empty</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['birthDayStudent'].errors['pattern']">Date of birth does not enter the correct format (2024-01-01)</small>
+          </div>
+        </div>
+    </div>
+    <div style="margin-top: 30px; margin-left: 30px;" class="col-md-5">
+        <label class="control-label col-sm-3" >ID Nation:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="idNation" placeholder="Example: 1 / 2 ..." name="idNation">
+          <div *ngIf="addFormStudent['controls']['idNation'].dirty && addFormStudent['controls']['idNation'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idNation'].errors['required']">The country code is not allowed to disable and only allow numbers</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idNation'].errors['pattern']">The nation code does not enter the correct format (EX : 1)</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idNation'].errors['maxlength']">The country code does not exist</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >ID City:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="idCity" placeholder="Example: 1 / 2 ..." name="idCity">
+          <div *ngIf="addFormStudent['controls']['idCity'].dirty && addFormStudent['controls']['idCity'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idCity'].errors['required']">The city codes are not allowed to leave and only allow numbers</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idCity'].errors['pattern']">The city code does not enter the correct format (EX : 1)</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idCity'].errors['maxlength']">The City code does not exist</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >ID District:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="idDistrict" placeholder="Example: 1 / 2 ..." name="idDistrict">
+          <div *ngIf="addFormStudent['controls']['idDistrict'].dirty && addFormStudent['controls']['idDistrict'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idDistrict'].errors['required']">The District codes are not allowed to leave and only allow numbers</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idDistrict'].errors['pattern']">The District code does not enter the correct format (EX : 1)</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idDistrict'].errors['maxlength']">The District code does not exist</small>
+          </div>
+        </div>
+        <label class="control-label col-sm-3" >ID Ward:</label>
+        <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
+          <input type="text" class="form-control" formControlName="idWard" placeholder="Example: 1 / 2 ..." name="idWard">
+          <div *ngIf="addFormStudent['controls']['idWard'].dirty && addFormStudent['controls']['idWard'].errors">
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idWard'].errors['required']">The Ward codes are not allowed to leave and only allow numbers</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idWard'].errors['pattern']">The Ward code does not enter the correct format (EX : 1)</small>
+            <small style="color: red;" *ngIf="addFormStudent['controls']['idWard'].errors['maxlength']">The Ward code does not exist</small>
+          </div>
+        </div>
+    </div>
+</div>
+
+  <div class="form-group" style="margin-top: 50px; margin-left: 385px;">        
+    <div class="col-sm-offset-2 col-sm-9">
+      <button type="submit" class="btn btn-primary" [disabled]="addFormStudent.invalid">Add New</button>
+    </div>
+  </div>
+</form>
+</div>
