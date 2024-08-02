@@ -9,11 +9,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-nation.component.css']
 })
 export class CreateNationComponent implements OnInit{
+  titles = ['Châu Á', 'Châu Phi', 'Châu Âu', 'Châu Mỹ', 'Châu Đại Dương', 'Châu Nam Cực'];
+  
   constructor(private stdSrv: StudentService, private router: Router){}
-
+  
   createFormNation : FormGroup = new FormGroup({
     nameNation : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-    titleNation : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)])
+    titleNation : new FormControl('', [Validators.required])
   });
   ngOnInit(): void {
   }
@@ -26,5 +28,4 @@ export class CreateNationComponent implements OnInit{
       }
     })
   }
-
 }

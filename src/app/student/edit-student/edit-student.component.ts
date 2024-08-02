@@ -18,6 +18,12 @@ export class EditStudentComponent implements OnInit{
   idCity: string = '';
   idDistrict: string = '';
   idWard: string = '';
+  
+
+  nations: { idNation: number, nameNation: string, titleNation: string }[] = [];
+  citys: { idCity: number, nameCity: string, titleCity: string }[] = [];
+  districts: { idDistrict: number, nameDistrict: string, titleDistrict: string }[] = [];
+  wards: { idWard: number, nameWard: string, titleWard: string }[] = [];
 
   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
   editFormStudent : FormGroup = new FormGroup({
@@ -37,13 +43,24 @@ export class EditStudentComponent implements OnInit{
         nameStudent: new FormControl(data.nameStudent, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒốÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưừịấ\s]+$/)]),
         phoneStudent: new FormControl(data.phoneStudent, [Validators.required, Validators.pattern(/^0+[0-9]{9}$/)]),
         emailStudent: new FormControl(data.emailStudent, [Validators.required, Validators.email]),
-        birthDayStudent: new FormControl(data.birthDayStudent, [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]),
-        idNation: new FormControl(data.idNation, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
-        idCity: new FormControl(data.idCity, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
-        idDistrict: new FormControl(data.idDistrict, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
-        idWard: new FormControl(data.idWard, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
+        birthDayStudent: new FormControl(data.birthDayStudent, [Validators.required]),
+        idNation: new FormControl(data.idNation, [Validators.required]),
+        idCity: new FormControl(data.idCity, [Validators.required]),
+        idDistrict: new FormControl(data.idDistrict, [Validators.required]),
+        idWard: new FormControl(data.idWard, [Validators.required]),
       });
-      console.log(this.editFormStudent)
+      this.stdSrv.getListNation().subscribe((data: { idNation: number, nameNation: string, titleNation: string }[]) => {
+        this.nations = data;
+      });
+      this.stdSrv.getListCity().subscribe((data: { idCity: number, nameCity: string, titleCity: string }[]) => {
+        this.citys = data;
+      });
+      this.stdSrv.getListDistrict().subscribe((data: { idDistrict: number, nameDistrict: string, titleDistrict: string }[]) => {
+        this.districts = data;
+      });
+      this.stdSrv.getListWard().subscribe((data: { idWard: number, nameWard: string, titleWard: string }[] ) =>{
+        this.wards = data;
+      });
     });
   }
 

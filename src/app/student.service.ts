@@ -8,9 +8,36 @@ import { Observable } from 'rxjs';
 export class StudentService {
 
   constructor(private http: HttpClient) { }
+
+  private apiUrl = 'https://localhost:7021/api';
+  
+  // getCitysByNation(idNation: number): Observable<{ idCity: number, nameCity: string, titleCity: string }[]> {
+  //   return this.http.get<{ idCity: number, nameCity: string, titleCity: string }[]>(`${this.baseUrl}/Citys/${idNation}` );
+  // }
+  // Phương thức để lấy danh sách thành phố theo ID quốc gia
+  getCitysByNation(idNation: number): Observable<{ idCity: number, nameCity: string, titleCity: string }[]> {
+    return this.http.get<{ idCity: number, nameCity: string, titleCity: string }[]>(`${this.apiUrl}/Citys?idNation=${idNation}`);
+  }
+    // Các phương thức khác như lấy quận và phường...
+    getListDistrictByCity(idCity: number): Observable<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]> {
+      return this.http.get<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]>(`${this.apiUrl}/Districts?idCity=${idCity}`);
+    }
+  
+    getListWardByCity(idCity: number): Observable<{ idWard: number, nameWard: string, titleWard: string }[]> {
+      return this.http.get<{ idWard: number, nameWard: string, titleWard: string }[]>(`${this.apiUrl}/Wards?idDistrict=${idCity}`);
+    }
+
+  // getDistrictsByCity(idCity: number): Observable<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]> {
+  //   return this.http.get<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]>(`${this.apiUrl}/Districts/${idCity}`);
+  // }
+
+  // getWardsByDistrict(idDistrict: number): Observable<{ idWard: number, nameWard: string, titleWard: string }[]> {
+  //   return this.http.get<{ idWard: number, nameWard: string, titleWard: string }[]>(`${this.apiUrl}/Wards/${idDistrict}`);
+  // }
+
   //GetAll Nation
-  getListNation(): Observable<any>{
-    return this.http.get<any>('https://localhost:7021/api/Nations')
+  getListNation(): Observable<{ idNation: number, nameNation: string, titleNation: string }[]>{
+    return this.http.get<{ idNation: number, nameNation: string, titleNation: string }[]>('https://localhost:7021/api/Nations')
   }
   //Add Nation
   createNation(data: any): Observable<any>{
@@ -41,8 +68,8 @@ export class StudentService {
     return this.http.get<any[]>('https://localhost:7021/api/Nations/search' + "?page=" + pageNation)
   }
   //GetAll City
-  getListCity(): Observable<any>{
-      return this.http.get<any>('https://localhost:7021/api/Citys')
+  getListCity(): Observable<{ idCity: number, nameCity: string, titleCity: string }[]>{
+      return this.http.get<{ idCity: number, nameCity: string, titleCity: string }[]>('https://localhost:7021/api/Citys')
   }
   //Add City
   createCity(data: any): Observable<any>{
@@ -73,8 +100,8 @@ export class StudentService {
       return this.http.get<any[]>('https://localhost:7021/api/Citys/search' + "?page=" + pageCity)
   }
   //GetAll District
-  getListDistrict(): Observable<any>{
-    return this.http.get<any>('https://localhost:7021/api/Districts')
+  getListDistrict(): Observable<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]>{
+    return this.http.get<{ idDistrict: number, nameDistrict: string, titleDistrict: string }[]>('https://localhost:7021/api/Districts')
   }
   //Add District
   createDistrict(data: any): Observable<any>{
@@ -105,8 +132,8 @@ export class StudentService {
       return this.http.get<any[]>('https://localhost:7021/api/Districts/search' + "?page=" + pageDistrict)
   }
   //GetAll Ward
-  getListWard(): Observable<any>{
-    return this.http.get<any>('https://localhost:7021/api/Wards')
+  getListWard(): Observable<{ idWard: number, nameWard: string, titleWard: string }[]>{
+    return this.http.get<{ idWard: number, nameWard: string, titleWard: string }[]>('https://localhost:7021/api/Wards')
   }
   //Add Ward
   createWard(data: any): Observable<any>{

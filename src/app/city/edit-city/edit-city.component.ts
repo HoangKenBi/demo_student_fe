@@ -13,23 +13,27 @@ export class EditCityComponent implements OnInit{
   nameCity: string = '';
   titleCity: string = '';
   idNation: string = '';
+  nations: { idNation: number, nameNation: string, titleNation: string }[] = [];
+  titleCitys = ['Thành Phố', 'Tỉnh', 'City', 'Conscious'];
 
   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
   editFormCity : FormGroup = new FormGroup({
-    nameCity : new FormControl(),
-    titleCity : new FormControl(),
-    idNation : new FormControl()
-  });
+        nameCity : new FormControl(),
+        titleCity : new FormControl(),
+        idNation : new FormControl()
+      });
 
   ngOnInit(): void {
     this.idCity = this._route.snapshot.params["idCity"];
     this.stdSrv.getOneCity(this.idCity).subscribe(data => {
       this.editFormCity = new FormGroup({
         nameCity : new FormControl(data.nameCity, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-        titleCity : new FormControl(data.titleCity, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-        idNation: new FormControl(data.idNation, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)])
+        titleCity : new FormControl(data.titleCity, [Validators.required]),
+        idNation: new FormControl(data.idNation,[Validators.required])
       });
-      console.log(this.editFormCity)
+      this.stdSrv.getListNation().subscribe((data: { idNation: number, nameNation: string, titleNation: string }[]) => {
+        this.nations = data;
+      });
     });
   }
   onUpdateCity(){
@@ -43,3 +47,37 @@ export class EditCityComponent implements OnInit{
   }
 
 }
+
+
+// idCity : number = 0;
+//   nameCity: string = '';
+//   titleCity: string = '';
+//   idNation: string = '';
+
+//   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
+//   editFormCity : FormGroup = new FormGroup({
+//     nameCity : new FormControl(),
+//     titleCity : new FormControl(),
+//     idNation : new FormControl()
+//   });
+
+//   ngOnInit(): void {
+//     this.idCity = this._route.snapshot.params["idCity"];
+//     this.stdSrv.getOneCity(this.idCity).subscribe(data => {
+//       this.editFormCity = new FormGroup({
+//         nameCity : new FormControl(data.nameCity, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
+//         titleCity : new FormControl(data.titleCity, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
+//         idNation: new FormControl(data.idNation, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)])
+//       });
+//       console.log(this.editFormCity)
+//     });
+//   }
+//   onUpdateCity(){
+//     if (this.editFormCity.invalid) {return}
+//     this.stdSrv.updateCity(this.idCity, this.editFormCity.value).subscribe(data => {
+//       console.log(data);
+//       if(confirm("You have successfully corrected!")){
+//         this.router.navigate(['/home/list-city']);
+//       }
+//     })
+//   }

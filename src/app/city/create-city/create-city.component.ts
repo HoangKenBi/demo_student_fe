@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/student.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-city',
@@ -9,14 +9,21 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create-city.component.css']
 })
 export class CreateCityComponent implements OnInit{
-  constructor(private stdSrv: StudentService, private router: Router){}
+  createFormCity!: FormGroup;
+  nations: { idNation: number, nameNation: string, titleNation: string }[] = [];
+  titleCitys = ['Thành Phố', 'Tỉnh', 'City', 'Conscious'];
+  constructor(private stdSrv: StudentService, private router: Router, private fb: FormBuilder){}
 
-  createFormCity : FormGroup = new FormGroup({
-    nameCity : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-    titleCity : new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-    idNation : new FormControl('', [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)])
-  });
   ngOnInit(): void {
+    this.createFormCity = this.fb.group({
+      nameCity: ['', [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]],
+      titleCity: ['', [Validators.required]],
+      idNation: ['', Validators.required]
+    });
+
+    this.stdSrv.getListNation().subscribe((data: { idNation: number, nameNation: string, titleNation: string }[]) => {
+      this.nations = data;
+    });
   }
   onCreateCity(){
     if (this.createFormCity.invalid) {return}
@@ -27,5 +34,4 @@ export class CreateCityComponent implements OnInit{
       }
     })
   }
-
 }

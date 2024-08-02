@@ -11,12 +11,13 @@
         <small style="color: red;" *ngIf="editFormNation['controls']['nameNation'].errors['pattern']">The name of the country must be entered correctly and not allowed to enter the number</small>
       </div>
     </div>
-    <label class="control-label col-sm-3" >Title Nation: {{titleNation}}</label>
-    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
-      <input type="text" class="form-control" formControlName="titleNation" placeholder="" name="titleNation">
-      <div *ngIf="editFormNation['controls']['titleNation'].dirty && editFormNation['controls']['titleNation'].errors">
-        <small style="color: red;" *ngIf="editFormNation['controls']['titleNation'].errors['required']">The title of the country is not empty </small>
-        <small style="color: red;" *ngIf="editFormNation['controls']['titleNation'].errors['pattern']">The nation's title must be exactly imported and not allowed to enter the number</small>
+    <label class="control-label col-sm-3" >Title Nation:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">  
+      <div class="custom-select">
+        <select class="form-control" formControlName="titleNation" >
+          <option  value="" disabled selected>Select national title</option>
+          <option *ngFor="let title of titles">{{ title }}</option>
+        </select>
       </div>
     </div>
   </div>
@@ -27,4 +28,3 @@
   </div>
 </form>
 </div>
-<!-- [disabled]="editFormNation.invalid -->

@@ -13,6 +13,8 @@ export class EditDistrictComponent implements OnInit{
   nameDistrict: string = '';
   titleDistrict: string = '';
   idCity: string = '';
+  citys: { idCity: number, nameCity: string, titleCity: string }[] = [];
+  titleDistricts = ['Quận', 'Huyện', 'Thị Xã', 'Thị Trấn', 'District','Town'];
 
   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
   districtFormEdit : FormGroup = new FormGroup({
@@ -25,11 +27,13 @@ export class EditDistrictComponent implements OnInit{
     this.idDistrict = this._route.snapshot.params['idDistrict'];
     this.stdSrv.getOneDistrict(this.idDistrict).subscribe(data =>{
       this.districtFormEdit = new FormGroup({
-        nameDistrict: new FormControl(data.nameDistrict, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáãâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưừ\s]+$/)]),
-        titleDistrict: new FormControl(data.titleDistrict, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưậị\s]+$/)]),
-        idCity: new FormControl(data.idCity, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
+        nameDistrict: new FormControl(data.nameDistrict, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáãâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưừỉơ\s]+$/)]),
+        titleDistrict: new FormControl(data.titleDistrict, [Validators.required]),
+        idCity: new FormControl(data.idCity, [Validators.required]),
       });
-      console.log(this.districtFormEdit)
+      this.stdSrv.getListCity().subscribe((data: { idCity: number, nameCity: string, titleCity: string }[]) => {
+        this.citys = data;
+      });
     });
   }
   onUpdateDistrict(){

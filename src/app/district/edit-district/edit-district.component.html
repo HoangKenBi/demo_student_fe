@@ -11,22 +11,23 @@
         <small style="color: red;" *ngIf="districtFormEdit['controls']['nameDistrict'].errors['pattern']">The name of the district must be imported correctly and not allowed to enter the number</small>
       </div>
     </div>
-    <label class="control-label col-sm-3" >Title District: {{titleDistrict}}</label>
-    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
-      <input type="text" class="form-control" formControlName="titleDistrict" placeholder="Example: Quận / Huyện / Thị Xã" name="titleDistrict">
-      <div *ngIf="districtFormEdit['controls']['titleDistrict'].dirty && districtFormEdit['controls']['titleDistrict'].errors">
-        <small style="color: red;" *ngIf="districtFormEdit['controls']['titleDistrict'].errors['required']">The district's title is not allowed to leave empty </small>
-        <small style="color: red;" *ngIf="districtFormEdit['controls']['titleDistrict'].errors['pattern']">The district's title must be entered correctly and is not allowed to enter the number - Special characters</small>
+    <label class="control-label col-sm-3" >Title District:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">  
+      <div class="custom-select">
+        <select class="form-control" formControlName="titleDistrict" >
+          <option  value="" disabled selected> Choose the districts title</option>
+          <option *ngFor="let titleDistrict of titleDistricts">{{ titleDistrict }}</option>
+        </select>
       </div>
     </div>
-    <label class="control-label col-sm-3" >ID City: {{idCity}}</label>
-    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">          
-      <input type="text" class="form-control" formControlName="idCity" placeholder="Example: 1 / 2 ..." name="idCity">
-      <div *ngIf="districtFormEdit['controls']['idCity'].dirty && districtFormEdit['controls']['idCity'].errors">
-        <small style="color: red;" *ngIf="districtFormEdit['controls']['idCity'].errors['required']">The city codes are not allowed to leave and only allow numbers</small>
-        <small style="color: red;" *ngIf="districtFormEdit['controls']['idCity'].errors['pattern']">The city code does not enter the correct format (EX : 1)</small>
-        <small style="color: red;" *ngIf="districtFormEdit['controls']['idCity'].errors['maxlength']">The City code does not exist</small>
-      </div>
+    <label class="control-label col-sm-3" >City:</label>
+    <div class="col-sm-10" style="margin-top: 10px; width: 300px;">  
+      <div class="custom-select">
+        <select class="form-control" formControlName="idCity" >
+          <option  value="" disabled selected> Choose the City</option>
+          <option  *ngFor=" let city of citys" [value]="city.idCity">{{ city.nameCity }}</option>
+        </select> 
+      </div>        
     </div>
   </div>
   <div class="form-group" style="margin-top: 20px;">        

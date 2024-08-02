@@ -13,6 +13,8 @@ export class EditWardComponent implements OnInit{
   nameWard: string = '';
   titleWard: string = '';
   idDistrict: string = '';
+  districts: { idDistrict: number, nameDistrict: string, titleDistrict: string }[] = [];
+  titleWards = ['Phường', 'Xã', 'Ward'];
 
   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
   wardFormEdit : FormGroup = new FormGroup({
@@ -25,10 +27,12 @@ export class EditWardComponent implements OnInit{
     this.stdSrv.getOneWard(this.idWard).subscribe(data =>{
       this.wardFormEdit = new FormGroup({
         nameWard: new FormControl(data.nameWard, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒốÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưừịấ\s]+$/)]),
-        titleWard: new FormControl(data.titleWard, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơưậịấ\s]+$/)]),
-        idDistrict: new FormControl(data.idDistrict, [Validators.required, Validators.maxLength(2), Validators.pattern(/^[1-9]+$/)]),
+        titleWard: new FormControl(data.titleWard, [Validators.required]),
+        idDistrict: new FormControl(data.idDistrict, [Validators.required]),
       });
-      console.log(this.wardFormEdit)
+      this.stdSrv.getListDistrict().subscribe((data: { idDistrict: number, nameDistrict: string, titleDistrict: string }[]) => {
+        this.districts = data;
+      });
     });
   }
   onUpdateWard(){

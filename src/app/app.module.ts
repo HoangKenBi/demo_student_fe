@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,6 +23,8 @@ import { EditWardComponent } from './ward/edit-ward/edit-ward.component';
 import { ListStudentComponent } from './student/list-student/list-student.component';
 import { CreateStudentComponent } from './student/create-student/create-student.component';
 import { EditStudentComponent } from './student/edit-student/edit-student.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,8 @@ import { EditStudentComponent } from './student/edit-student/edit-student.compon
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

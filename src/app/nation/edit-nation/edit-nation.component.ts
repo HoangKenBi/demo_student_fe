@@ -12,6 +12,7 @@ export class EditNationComponent implements OnInit{
   idNation : number = 0;
   nameNation : string = '';
   titleNation : string = '';
+  titles = ['Châu Á', 'Châu Phi', 'Châu Âu', 'Châu Mỹ', 'Châu Đại Dương', 'Châu Nam Cực'];
 
   constructor(private stdSrv: StudentService, private _route: ActivatedRoute, private router: Router){}
   
@@ -25,7 +26,7 @@ export class EditNationComponent implements OnInit{
     this.stdSrv.getOneNation(this.idNation).subscribe(data => {
       this.editFormNation = new FormGroup({
         nameNation: new FormControl(data.nameNation, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)]),
-        titleNation: new FormControl(data.titleNation, [Validators.required, Validators.pattern(/^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơỲÝỴỶỸỳýỵỷỹƯăâêôơư\s]+$/)])
+        titleNation: new FormControl(data.titleNation, [Validators.required])
       });
     })
   }
@@ -38,5 +39,4 @@ export class EditNationComponent implements OnInit{
       }
     })
   }
-
 }
